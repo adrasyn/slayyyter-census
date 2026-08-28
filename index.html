@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slayyyter owes the Commonwealth</title>
+<meta name="description" content="A live counter of the Census fine Slayyyter has been accruing since Census night, 11 August 2026. Unofficial. Deeply unofficial.">
+<meta name="theme-color" content="#A3BAC9">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Slayyyter owes the Commonwealth">
+<meta property="og:description" content="She was in Australia on Census night. She says she didn't fill it in. The meter is running at $364 a day.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Slayyyter owes the Commonwealth">
+<meta name="twitter:description" content="She was in Australia on Census night. She says she didn't fill it in. The meter is running at $364 a day.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='none' stroke='%23DC1A1A' stroke-width='9'/%3E%3Ctext x='50' y='73' font-family='Impact,sans-serif' font-size='62' text-anchor='middle' fill='%23DC1A1A'%3E%24%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Pirata+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --wall:#A3BAC9;
+  --wall-deep:#7A93A5;
+  --red:#DC1A1A;
+  --red-deep:#A81212;
+  --ink:#14171B;
+  --bleach:#EDE7DA;
+  --denim:#4A6076;
+  --rule:rgba(20,23,27,.22);
+}
+
+*{box-sizing:border-box}
+
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+
+body{
+  margin:0;
+  min-height:100dvh;
+  overflow-x:clip;
+  display:flex;
+  justify-content:center;
+  padding:clamp(16px,5vw,64px);
+  background:
+    radial-gradient(120% 90% at 50% 8%, #B6CAD7 0%, var(--wall) 45%, var(--wall-deep) 100%);
+  color:var(--ink);
+  font-family:"Courier Prime",ui-monospace,"Courier New",monospace;
+  font-size:16px;
+  line-height:1.55;
+}
+
+/* Photocopier grain over the whole wall. */
+.grain{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9;
+  opacity:.22;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.notice{
+  position:relative;
+  margin:auto;
+  width:100%;
+  max-width:720px;
+  background:var(--bleach);
+  padding:clamp(24px,5vw,52px);
+  transform:rotate(-.35deg);
+  box-shadow:0 1px 0 rgba(255,255,255,.5), 0 18px 44px rgba(15,26,36,.34);
+}
+
+.settle{animation:settle .7s cubic-bezier(.2,.9,.25,1) both}
+@keyframes settle{
+  from{opacity:0;transform:rotate(-.35deg) translateY(14px)}
+  to{opacity:1;transform:rotate(-.35deg) translateY(0)}
+}
+
+/* — masthead — */
+.masthead{
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px 12px;
+  align-items:baseline;
+  padding-right:clamp(76px,18vw,136px);
+  font-size:11px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--denim);
+  padding-bottom:10px;
+  border-bottom:1.5px solid var(--ink);
+}
+.masthead-note{color:var(--red-deep);font-weight:700}
+
+.wordmark{
+  font-family:"Pirata One",serif;
+  font-weight:400;
+  font-size:clamp(46px,11vw,86px);
+  line-height:.95;
+  margin:26px 0 0;
+  letter-spacing:.01em;
+}
+.wordmark-sub{
+  display:block;
+  font-family:"Courier Prime",monospace;
+  font-size:clamp(13px,2.6vw,17px);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--denim);
+  margin-top:12px;
+}
+
+/* — the number — */
+.field-label{
+  margin:30px 0 8px;
+  font-size:11px;
+  letter-spacing:.19em;
+  text-transform:uppercase;
+  color:var(--denim);
+}
+.amount{
+  margin:0;
+  font-family:"Anton",Impact,sans-serif;
+  font-size:clamp(56px,17vw,132px);
+  line-height:.9;
+  color:var(--red);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.01em;
+  white-space:nowrap;
+}
+.amount-cents{font-size:.42em;color:var(--red-deep);letter-spacing:0}
+
+/* — data strip — */
+.ledger{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px 12px;
+  margin-top:32px;
+  padding:18px 0;
+  border-top:1.5px solid var(--ink);
+  border-bottom:1.5px solid var(--ink);
+}
+.cell-label{
+  margin:0 0 5px;
+  font-size:10px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--denim);
+  margin-bottom:5px;
+}
+.cell-value{
+  margin:0;
+  font-family:"Anton",Impact,sans-serif;
+  font-size:clamp(17px,3.4vw,23px);
+  letter-spacing:.02em;
+  font-variant-numeric:tabular-nums;
+}
+.cell-value-live{color:var(--red)}
+
+/* — body copy — */
+.account{margin:28px 0 0;max-width:56ch}
+.account p{margin:0 0 14px}
+.account p:last-child{margin-bottom:0}
+.pull{font-weight:700}
+
+.smallprint{
+  margin-top:30px;
+  padding-top:16px;
+  border-top:1px solid var(--rule);
+  font-size:12.5px;
+  line-height:1.65;
+  color:var(--denim);
+  max-width:62ch;
+}
+.smallprint a{color:var(--red-deep);text-decoration-thickness:1px;text-underline-offset:2px}
+.smallprint a:focus-visible{
+  outline:2.5px solid var(--red);
+  outline-offset:3px;
+  border-radius:1px;
+}
+
+/* — the stamp — */
+.stamp{
+  position:absolute;
+  top:clamp(-26px,-4vw,-14px);
+  right:clamp(-14px,-1vw,-6px);
+  width:clamp(88px,19vw,148px);
+  height:auto;
+  transform:rotate(-13deg);
+  mix-blend-mode:multiply;
+  opacity:.92;
+  pointer-events:none;
+}
+.stamp-hit{animation:stamp-hit .42s cubic-bezier(.3,1.5,.5,1) .55s both}
+@keyframes stamp-hit{
+  from{opacity:0;transform:rotate(-24deg) scale(2.1)}
+  to{opacity:.92;transform:rotate(-13deg) scale(1)}
+}
+
+@media (max-width:560px){
+  .ledger{grid-template-columns:repeat(2,1fr)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .settle,.stamp-hit{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<main class="notice settle">
+
+  <svg class="stamp stamp-hit" viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="50" r="41" fill="none" stroke="#DC1A1A" stroke-width="8.5"/>
+    <text x="50" y="74" font-family="Anton, Impact, sans-serif" font-size="66"
+          text-anchor="middle" fill="#DC1A1A">$</text>
+  </svg>
+
+  <div class="masthead">
+    <span>Unofficial running total</span>
+    <span aria-hidden="true">&mdash;</span>
+    <span class="masthead-note">not an ABS notice</span>
+  </div>
+
+  <h1 class="wordmark">
+    Slayyyter
+    <span class="wordmark-sub">owes the Commonwealth</span>
+  </h1>
+
+  <p class="field-label">Amount accrued since Census night</p>
+  <p class="amount" id="amount" aria-live="off">
+    <span id="amount-dollars">$0</span><span class="amount-cents" id="amount-cents">.00</span>
+  </p>
+
+  <div class="ledger">
+    <div>
+      <p class="cell-label">Days elapsed</p>
+      <p class="cell-value" id="days">0</p>
+    </div>
+    <div>
+      <p class="cell-label">Daily rate</p>
+      <p class="cell-value">$364</p>
+    </div>
+    <div>
+      <p class="cell-label">Census night</p>
+      <p class="cell-value">11 Aug 26</p>
+    </div>
+    <div>
+      <p class="cell-label">Status</p>
+      <p class="cell-value cell-value-live">Accruing</p>
+    </div>
+  </div>
+
+  <div class="account">
+    <p>On Tuesday 11 August 2026, Slayyyter was in Australia. Almost everyone in the
+       country on Census night has to be counted &mdash; visitors, international students
+       and visa holders included. Only foreign diplomats get out of it.</p>
+    <p class="pull">She has said she didn't fill it in.</p>
+    <p>The maximum penalty for failing to complete the Census when you have been directed
+       to is $364 per day. This page multiplies that figure by the time elapsed, and does
+       not stop.</p>
+  </div>
+
+  <p class="smallprint">
+    This is a joke and it is not a bill. Nobody is fined merely for being late. The $364
+    daily penalty applies only after the Australian Bureau of Statistics serves a written
+    Notice of Direction, the direction is still refused, and a court convicts &mdash; see
+    <a href="https://info.census.abs.gov.au/about/doing-census/completing-census-compulsory">the
+    ABS on what actually happens</a>. This page has no connection to the ABS, or to
+    Slayyyter. The counter runs from midnight AEST on 11 August 2026 and shows the same
+    figure wherever you are reading it.
+  </p>
+
+</main>
+
+<script src="fine.js"></script>
+<script>
+(function(){
+  var dollarsEl = document.getElementById('amount-dollars');
+  var centsEl   = document.getElementById('amount-cents');
+  var daysEl    = document.getElementById('days');
+  var amountEl  = document.getElementById('amount');
+  var calm      = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lastWidth = -1;
+
+  // The fine passes six figures inside a year, so the number has to shrink to
+  // fit the page rather than wrap in the middle of a dollar amount.
+  function contentWidth(){
+    var range = document.createRange();
+    range.selectNodeContents(amountEl);
+    return range.getBoundingClientRect().width;
+  }
+
+  function fitAmount(){
+    amountEl.style.fontSize = '';
+    var size = parseFloat(getComputedStyle(amountEl).fontSize);
+    var avail = amountEl.clientWidth;
+    var guard = 0;
+    while (contentWidth() > avail && size > 18 && guard++ < 90) {
+      size -= 2;
+      amountEl.style.fontSize = size + 'px';
+    }
+  }
+
+  function tick(){
+    var now = Date.now();
+    var text = formatFine(fineAt(now));
+    var split = text.lastIndexOf('.');
+    dollarsEl.textContent = text.slice(0, split);
+    centsEl.textContent   = text.slice(split);
+    daysEl.textContent    = daysAt(now).toLocaleString('en-AU');
+
+    // Only remeasure when the figure actually changes length.
+    if (text.length !== lastWidth) {
+      lastWidth = text.length;
+      fitAmount();
+    }
+  }
+
+  tick();
+  setInterval(tick, calm ? 1000 : 100);
+
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(fitAmount, 120);
+  });
+
+  // Webfont metrics differ from the fallback, so refit once Anton lands.
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAmount);
+})();
+</script>
+
+</body>
+</html>
