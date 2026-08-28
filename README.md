@@ -47,5 +47,7 @@ node test.js                  # run the maths checks
 
 ## Deploying
 
-Static — no build step. Push to GitHub and set Pages to deploy from the default
-branch, root folder.
+Static — no build step. GitHub Pages serves the default branch, root folder.
+
+Live at <https://slayyytercensus.wlsn.me>. The `CNAME` file holds the custom
+domain; removing it reverts the site to `adrasyn.github.io/slayyyter-census`.
