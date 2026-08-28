@@ -30,7 +30,10 @@ One sentence, one enormous number. Hot pink into red, with a turning Y2K
 starburst, drifting blobs and twinkling sparkles — all generated in CSS, so
 there are no image assets. Pirata One for the sentence (her logo has been
 blackletter since the 2019 mixtape), Anton for the figure, given the chrome
-treatment off the mixtape cover, Courier Prime for the footnote.
+treatment off the mixtape cover, Helvetica for the footnote.
+
+The footnote runs to 70% of the window width, widening to 88% under 760px so
+it doesn't collapse into a narrow column on a phone.
 
 The counter scales itself down if the figure ever outgrows its line, so the
 layout survives the fine reaching six and seven figures.

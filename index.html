@@ -121,21 +121,23 @@ body{
 
 /* ————— footnote ————— */
 .footnote{
-  padding:clamp(16px,3vw,26px) clamp(18px,6vw,48px) clamp(24px,4vw,38px);
-  font-size:12.5px;
+  padding:clamp(16px,3vw,26px) 0 clamp(24px,4vw,38px);
+  font-family:Helvetica,"Helvetica Neue",Arial,sans-serif;
+  font-size:clamp(13px,1.05vw,16px);
   line-height:1.62;
   color:rgba(255,255,255,.9);
   text-align:center;
 }
-.footnote-inner{max-width:70ch;margin:0 auto}
+.footnote-inner{width:70%;margin:0 auto}
 .footnote p{margin:0 0 9px}
 .footnote p:last-child{margin-bottom:0}
-.footnote strong{color:#fff;font-weight:700}
-.footnote a{color:#fff;text-decoration-thickness:1px;text-underline-offset:2px}
-.footnote a:focus-visible{outline:2.5px solid #fff;outline-offset:3px;border-radius:2px}
+
+@media (max-width:760px){
+  .footnote-inner{width:88%}
+}
 
 @media (max-width:560px){
-  .footnote{font-size:11.5px;line-height:1.58}
+  .footnote{line-height:1.58}
   .stage{padding-bottom:clamp(12px,3vw,24px)}
 }
 
@@ -172,17 +174,13 @@ body{
 
 <footer class="footnote">
   <div class="footnote-inner">
-    <p>Slayyyter was in Australia on Census night, Tuesday 11 August 2026 &mdash;
-       <span id="days">0</span> days ago. Almost everyone in the country that night has to
-       be counted, visitors and visa holders included. <strong>She has said she didn't fill
-       it in.</strong> The counter runs from midnight AEST at $364 a day, the maximum daily
-       penalty for failing to complete the Census after being directed to.</p>
-    <p>It's a joke, not a bill. Nobody is fined merely for being late: the penalty applies
+    <p>Slayyyter was in Australia on Census night, Tuesday 11 August 2026. Everyone in the
+       country that night has to be counted, visitors and visa holders included, but she
+       didn&rsquo;t fill it in!! So she&rsquo;s accruing $364 in fines every day!!!</p>
+    <p>This website is just a bit of fun. Nobody is fined automatically. The penalty applies
        only after the Australian Bureau of Statistics serves a written Notice of Direction,
-       it is still refused, and a court convicts &mdash; see
-       <a href="https://info.census.abs.gov.au/about/doing-census/completing-census-compulsory">the
-       ABS on what actually happens</a>. This page has no connection to the ABS, or to
-       Slayyyter, and shows the same figure wherever you are reading it.</p>
+       it is still refused, and a court convicts. This page has no connection to the ABS, or
+       to Slayyyter.</p>
   </div>
 </footer>
 
@@ -191,7 +189,6 @@ body{
 (function(){
   var dollarsEl = document.getElementById('amount-dollars');
   var centsEl   = document.getElementById('amount-cents');
-  var daysEl    = document.getElementById('days');
   var amountEl  = document.getElementById('amount');
   var calm      = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var lastLen   = -1;
@@ -221,7 +218,6 @@ body{
     var split = text.lastIndexOf('.');
     dollarsEl.textContent = text.slice(0, split);
     centsEl.textContent   = text.slice(split);
-    daysEl.textContent    = daysAt(now).toLocaleString('en-AU');
 
     if (text.length !== lastLen) { lastLen = text.length; fitAmount(); }
   }
