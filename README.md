@@ -26,10 +26,14 @@ every visitor sees the same figure regardless of their own timezone.
 
 ## Design
 
-Palette and type come from the *Worst Girl in America* era: washed denim blue,
-fire-engine red, bleached white. Pirata One for the wordmark (her logo has been
-blackletter since the 2019 mixtape), Anton for the figures, Courier Prime for
-the form furniture.
+One sentence, one enormous number. Hot pink into red, with a turning Y2K
+starburst, drifting blobs and twinkling sparkles — all generated in CSS, so
+there are no image assets. Pirata One for the sentence (her logo has been
+blackletter since the 2019 mixtape), Anton for the figure, given the chrome
+treatment off the mixtape cover, Courier Prime for the footnote.
+
+The counter scales itself down if the figure ever outgrows its line, so the
+layout survives the fine reaching six and seven figures.
 
 ## Local
 
