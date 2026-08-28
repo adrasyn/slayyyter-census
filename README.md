@@ -20,6 +20,9 @@ no connection to the ABS or to Slayyyter.
 | `index.html` | The whole page — markup, styles and the ticker |
 | `fine.js` | Accrual maths, shared by the page and the tests |
 | `test.js` | Checks the maths. `node test.js` |
+| `og.jpg` | Social share image, 1200x630 |
+| `tools/make-og.py` | Regenerates `og.jpg`. `python3 tools/make-og.py` |
+| `CNAME` | Custom domain for GitHub Pages |
 
 The counter runs from midnight AEST on 11 August 2026, hardcoded to UTC+10 so
 every visitor sees the same figure regardless of their own timezone.
@@ -37,6 +40,10 @@ it doesn't collapse into a narrow column on a phone.
 
 The counter scales itself down if the figure ever outgrows its line, so the
 layout survives the fine reaching six and seven figures.
+
+The share image is generated, not hand-made — `tools/make-og.py` redraws the
+page's background and sets the line in Pirata One, fetching the font on first
+run. Edit `LINES` in that script and re-run to change the wording.
 
 ## Local
 
